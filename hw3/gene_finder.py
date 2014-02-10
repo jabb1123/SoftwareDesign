@@ -6,7 +6,7 @@ Created on Sun Feb  2 11:24:42 2014
 """
 
 # you may find it useful to import these variables (although you are not required to use them)
-from amino_acids import aa, codons
+from amino_acids import aa, codons, AminoAcids, Nucleotides
 
 def collapse(L):
     """ Converts a list of strings to a string by concatenating all elements of the list """
@@ -25,8 +25,25 @@ def coding_strand_to_AA(dna):
         returns: a string containing the sequence of amino acids encoded by the
                  the input DNA fragment
     """
-    
-    # YOUR IMPLEMENTATION HERE
+    Amino=[]
+    codon=''
+    AminoA=[]
+    for i in range(len(dna)/3):
+        if i==0:
+            codon=(dna[(0):(3)])
+            Amino.append(codon)
+            codon=''
+        else:
+            codon=(dna[(i*3):((1+i)*3)])
+            Amino.append(codon)
+            codon=''
+    for x in range(len(Amino)):
+        AminoA+=[Nucleotides[Amino[x]]]
+    return AminoA
+            
+                
+                
+        
 
 def coding_strand_to_AA_unit_tests():
     """ Unit tests for the coding_strand_to_AA function """
@@ -40,8 +57,17 @@ def get_reverse_complement(dna):
         dna: a DNA sequence represented as a string
         returns: the reverse complementary DNA sequence represented as a string
     """
-    
-    # YOUR IMPLEMENTATION HERE
+    rdna=''
+    for i in range(len(dna)):
+        if dna[i]=='A':
+            rdna+='T'
+        if dna[i]=='T':
+            rdna+='A'
+        if dna[i]=='C':
+            rdna+='G'
+        if dna[i]=='G':
+            rdna+='C'
+    return rdna
     
 def get_reverse_complement_unit_tests():
     """ Unit tests for the get_complement function """
@@ -57,7 +83,7 @@ def rest_of_ORF(dna):
         returns: the open reading frame represented as a string
     """
     
-    # YOUR IMPLEMENTATION HERE
+    
 
 def rest_of_ORF_unit_tests():
     """ Unit tests for the rest_of_ORF function """
@@ -75,7 +101,21 @@ def find_all_ORFs_oneframe(dna):
         returns: a list of non-nested ORFs
     """
      
-    # YOUR IMPLEMENTATION HERE        
+    Amino=[]
+    codon=''
+    AminoA=[]
+    for i in range(len(dna)/3):
+        if i==0:
+            codon=(dna[(0):(3)])
+            Amino.append(codon)
+            codon=''
+        else:
+            codon=(dna[(i*3):((1+i)*3)])
+            Amino.append(codon)
+            codon=''
+    for x in range(len(Amino)):
+        AminoA+=[Nucleotides[Amino[x]]]
+    return AminoA    
         
 def find_all_ORFs(dna):
     """ Finds all non-nested open reading frames in the given DNA sequence in all 3
@@ -86,9 +126,41 @@ def find_all_ORFs(dna):
         dna: a DNA sequence
         returns: a list of non-nested ORFs
     """
-     
-    # YOUR IMPLEMENTATION HERE
-
+    ORFs=[]
+    ORF=[]
+    codon=''
+    for i in range(len(dna)/3):
+        if i==0:
+            codon=(dna[(0):(3)])
+            if codon=='ATG':
+                for y in range(i,len(dna)):
+                    codon=(dna[(y*3):((y+1)*3)])
+                    i+=1
+                    if codon=='TAA' or codon=='TAG' or codon=='TGA':
+                        codon=''
+                        ORFs+=[ORF]
+                        ORF=[]
+                        break
+                    else:
+                        ORF.append(codon)
+                        codon=''
+        else:
+            codon=(dna[(i*3):((1+i)*3)])
+            if codon=='ATG':
+                for y in range(i,len(dna)):
+                    codon=(dna[(y*3):((y+1)*3)])
+                    i+=1
+                    if codon=='TAA' or codon=='TAG' or codon=='TGA':
+                        codon=''
+                        ORFs+=[ORF]
+                        ORF=[]
+                        break
+                    else:
+                        ORF.append(codon)
+                        codon=''
+                        
+    return ORFs
+    
 def find_all_ORFs_unit_tests():
     """ Unit tests for the find_all_ORFs function """
         
