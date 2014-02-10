@@ -101,7 +101,7 @@ def find_all_ORFs_oneframe(dna):
         returns: a list of non-nested ORFs
     """
      
-<<<<<<< HEAD
+#<<<<<<< HEAD
     Amino=[]
     codon=''
     AminoA=[]
@@ -118,7 +118,7 @@ def find_all_ORFs_oneframe(dna):
         AminoA+=[Nucleotides[Amino[x]]]
     return AminoA    
         
-=======
+#=======
     # YOUR IMPLEMENTATION HERE        
      
 def find_all_ORFs_oneframe_unit_tests():
@@ -126,7 +126,7 @@ def find_all_ORFs_oneframe_unit_tests():
 
     # YOUR IMPLEMENTATION HERE
 
->>>>>>> upstream/master
+#>>>>>>> upstream/master
 def find_all_ORFs(dna):
     """ Finds all non-nested open reading frames in the given DNA sequence in all 3
         possible frames and returns them as a list.  By non-nested we mean that if an
@@ -139,13 +139,15 @@ def find_all_ORFs(dna):
     ORFs=[]
     ORF=[]
     codon=''
-    for i in range(len(dna)/3):
+    i=0
+    while i<(len(dna)/3):
         if i==0:
             codon=(dna[(0):(3)])
+            i+=1
             if codon=='ATG':
-                for y in range(i,len(dna)):
+                for y in range(i-1,len(dna)):
                     codon=(dna[(y*3):((y+1)*3)])
-                    i+=1
+                    
                     if codon=='TAA' or codon=='TAG' or codon=='TGA':
                         codon=''
                         ORFs+=[ORF]
@@ -154,12 +156,14 @@ def find_all_ORFs(dna):
                     else:
                         ORF.append(codon)
                         codon=''
+                        i+=1
         else:
             codon=(dna[(i*3):((1+i)*3)])
+            i+=1
             if codon=='ATG':
-                for y in range(i,len(dna)):
+                for y in range(i-1,len(dna)):
                     codon=(dna[(y*3):((y+1)*3)])
-                    i+=1
+                    
                     if codon=='TAA' or codon=='TAG' or codon=='TGA':
                         codon=''
                         ORFs+=[ORF]
@@ -168,6 +172,7 @@ def find_all_ORFs(dna):
                     else:
                         ORF.append(codon)
                         codon=''
+                        i+=1
                         
     return ORFs
     
@@ -194,8 +199,19 @@ def find_all_ORFs_both_strands_unit_tests():
 def longest_ORF(dna):
     """ Finds the longest ORF on both strands of the specified DNA and returns it
         as a string"""
-
-    # YOUR IMPLEMENTATION HERE
+    longer1=[]
+    ORF=find_all_ORFs(dna)
+    for i in range(len(ORF)-1):
+        longer=longer1
+        if len(ORF[i])>len(ORF[i+1]):
+            longer1=ORF[i]
+        elif len(ORF[i])<=len(ORF[i+1]):
+            longer1=ORF[i+1]  
+        if len(longer)>=len(longer1):
+            longer1=longer
+        else:
+            longer=longer1
+    return longer
 
 def longest_ORF_unit_tests():
     """ Unit tests for the longest_ORF function """
