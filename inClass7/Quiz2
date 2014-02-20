@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb 13 13:42:06 2014
+
+@author: jacob
+"""
+
+def sum_of_squares(num):
+    Sum=0
+    for x in range (num):
+        Sum+=x**2
+    return Sum
+
