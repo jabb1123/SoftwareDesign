@@ -16,7 +16,7 @@ def build_random_function(min_depth, max_depth):
     mathmatical function which will be used later to create our art.
     It uses the inputs min and max depth."""
     #This function takes min_depth and max_depth as inputs and returns a random number of lists based upon the inputs
-    p=[['x'],['y']]
+    p=[['x'],['y']]     # why initialize if you won't need it (when max_depth == 1)
     if max_depth<=1:
         return p[random.randint(0,1)]
     a=build_random_function(min_depth-1,max_depth-1)
@@ -40,7 +40,7 @@ def evaluate_random_function(f, x, y):
     d=f[0]
     if d=='x':
         return x
-    if d=='y':
+    if d=='y':      # use elif statements...
         return y
     if d=='prod':
         return evaluate_random_function(f[1],x,y)*evaluate_random_function(f[2],x,y)
@@ -48,7 +48,7 @@ def evaluate_random_function(f, x, y):
         return sin(pi*evaluate_random_function(f[1],x,y))
     if d=='cos_pi':
         return cos(pi*evaluate_random_function(f[1],x,y))
-    if d=='^2':
+    if d=='^2':     # square function doesn't satisfy the requirement: input ranges from [-1,1] and the output [-1,1]
         return (evaluate_random_function(f[1],x,y))**2
     if d=='^3':
         return (evaluate_random_function(f[1],x,y))**3
@@ -63,6 +63,7 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
         TODO: please fill out the rest of this docstring
     """
     # your code goes here
+    # kudos to you for making sure everything is in float, you didn't have to do it this way... more comment on the PR
     val=float(val)
     input_interval_start=float(input_interval_start)
     input_interval_end=float(input_interval_end)
@@ -77,14 +78,14 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
 
 
 def draw(xsize,ysize,min_depth,max_depth):
-    xsize=int(xsize)
+    xsize=int(xsize)        # why cast int here and later as well?
     ysize=int(ysize)
     red=build_random_function(min_depth, max_depth)
     blue=build_random_function(min_depth, max_depth)
     green=build_random_function(min_depth, max_depth)
     im = Image.new("RGB",(int(xsize),int(ysize)))
     for i in range (int(xsize)):
-        x= remap_interval(i,0.0,xsize,-1.0,1.0)
+        x= remap_interval(i,0.0,xsize,-1.0,1.0)     # same as x = remap_interval(i, 0., xsize, -1, 1) Notice the `.` after 0.
         for j in range (int(ysize)):
             y=remap_interval(i,0.0,ysize,-1.0,1.0)
 
@@ -95,4 +96,5 @@ def draw(xsize,ysize,min_depth,max_depth):
             bluemap=remap_interval(bl,-1,1,0,255)
             greenmap=remap_interval(gn,-1,1,0,255)
             im.putpixel((i,j),(int(redmap),int(bluemap),int(greenmap)))
-    im.save("image"+str(number)+".bmp")
+    im.save("image"+str(number)+".bmp")     # you never specify a number? You may be doing it in a different commit...
+
