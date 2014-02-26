@@ -146,10 +146,7 @@ def find_all_ORFs_oneframe(dna):
             i+=len(rna)/3
         i+=1
     return Amino
-        
-#=======
-    # YOUR IMPLEMENTATION HERE        
-     
+
 def find_all_ORFs_oneframe_unit_tests():
     """ Unit tests for the find_all_ORFs_oneframe function """
 
