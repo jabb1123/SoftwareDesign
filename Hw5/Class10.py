@@ -21,5 +21,32 @@ def get_words_from_book(text):
     return re.findall("[a-zA-Z']+",text)
     
 def parse_through_text(textList):
-    textList = [x for x in textList if x != 'a' or 'the' or 'an' or 'to'or 'of' or 'in' or 'for' or 'at' or 'with' or 'on' or'from' or'by' or 'about' or 'as' or 'through' or 'after' or 'over' or 'between' or 'out' or 'because']
+    i=0
+    while i>len(textList):
+        try:
+            textList.remove('a')
+            textList.remove('the')
+            textList.remove('an')
+            textList.remove('to')
+            textList.remove('of')
+            textList.remove('in')
+            textList.remove('for')
+            textList.remove('at')
+            textList.remove('with')
+            textList.remove('on')
+            textList.remove('from')
+            textList.remove('by')
+            textList.remove('about')
+            textList.remove('as')
+            textList.remove('through')
+            textList.remove('after')
+            textList.remove('over')
+            textList.remove('between')
+            textList.remove('out')
+            textList.remove('because')
+            
+            
+        except:
+            pass
+        i+=1
     return textList
