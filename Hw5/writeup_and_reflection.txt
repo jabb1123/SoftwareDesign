@@ -1,0 +1,11 @@
+﻿Jacob and Kevin SoftDes HW5 Writeup
+
+1. In our code, we tried to parse through the King James Bible and look up the most frequently used words that were not articles or prepositions by creating multiple cases. 
+
+2. Our code first imports the King James Bible from project gutenberg. After importing it, we remove the beginning and the end where it is just gutenberg ads and disclaimers and does not pertain to the text of the Bible itself. Then we removed the articles and prepositions and are left with the text we want to parse through. In order to parse through the Bible, we use a series of lists to see the frequency of words.
+We also use the built in lambda function which is an undefined function which we could assign an identifier. We also used the built in map function which applies the function to every item of the list and returns a list of the results to parse out specific prepositions as shown in our code. 
+
+3. We found that 'and' was the most commonly used word with 38848 appearances. We also found that the word 'God' was used 4090 times. After checking our results with a known online database which records the frequency of all words in the Bible, our results were very accurate and was within several hundreds of the expected results. We found that 'He' is used 9665 times and is the most frequently used noun in the King James Bible. 
+
+4. We found out that we do not know how to parse through and remove certain elements in a list
+accurately. For example, when we tried to remove 'an', 'a', 'to' and any other short prepositions, we accidentally removed all occurrences of the letters 'a' and removed all occurrences of any words which incorporated 'an' and 'to' such as 'tonight' would become 'night' and 'and' would become 'd'. We could improve on this if we knew how to fix this error. However, we feel that we were successful because we were able to parse out longer prepositions and we found that our results were very close to the expected results. We had specific strategies where we talked about what we wanted to parse out and how we wanted to use built in functions in python in order to learn more about them. We believe that our unit testing was very simple and straightforward and showed us that our code was working fine. We believe that our project was appropriate 
