@@ -23,6 +23,7 @@ def get_words_from_book(text):
     return re.findall("[a-zA-Z']+",text)
     
 def parse_through_text(textList):
+    # I commend you for using map function, but why not use map on a list of all words you want replaced to do what you're doing?
     newText=map(lambda x: str.replace(x,'the',''),textList)
     newText=map(lambda x: str.replace(x,'The',''),newText)
     newText=map(lambda x: str.replace(x,'for',''),newText)
@@ -48,6 +49,7 @@ def Compare_number_of_occurances(word1,word2,textList):
         elif textList[i]==word2:
             y+=1
     return (x,y)
+    # I don't understand what the purpose of this function is..?
 
     '''  
 def Analyze_bible(word1,word2):
