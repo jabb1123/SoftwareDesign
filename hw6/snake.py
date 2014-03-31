@@ -20,6 +20,7 @@ class SnakeWorld:
         self.ycoor=[] #List of all y-coordinates that head 1 has had in order
         self.xcoor2=[] #and head 2 x-coordinates
         self.ycoor2=[] #and head 2 y-coordinates
+        # I don't understand this concept. You have a block every 10x10 square on the screen. Why?
         for x in range(10,630,10): #This loop adds all the blocks which make up the game board
               for y in range(10,470,10):
                   block = Block((255,255,255),10,10,x,y) #Creates one instance of the Block object
@@ -31,7 +32,7 @@ class SnakeWorld:
         self.head2Rect=pygame.Rect(self.head2.x,self.head2.y,self.head2.width,self.head2.height) #same as head1 for head 2
         self.foodRect=pygame.Rect(self.food.x-1,self.food.y-1,self.food.width-1,self.food.height-1) #stores the rectangle of the food location
         self.boardRect=pygame.Rect(10,10,620,460)
-        self.flag = False        
+        self.flag = False        # what's this flag for?
         
     def update(self):
         self.xcoor.append(self.head.x)
@@ -137,6 +138,7 @@ class SnakeWorld:
         for tail in self.tails:
             tailrect = pygame.Rect(tail.x,tail.y,tail.width,tail.height)
             if self.headRect.colliderect(tailrect):
+                # the names of these msgObjects baffle me...why not just create a new class for these messages?
                 self.msgObject = self.font.render('GAME OVER',False,(0,0,255))
                 self.msgObject2 = self.font2.render('P1 Score was: '+str(self.score),False,(125,125,125))
                 self.msgObject25 = self.font2.render('P2 Score was: ' + str(self.score2),False,(125,125,125))
@@ -159,10 +161,10 @@ class SnakeWorld:
                 self.msgRect3.topleft = (200,330)
                 self.flag = True
                 break
-            else:
+            else:   # no need for else if you're not using it.
                 pass
           
-            if self.head2Rect.colliderect(tailrect):
+            if self.head2Rect.colliderect(tailrect):    # a lot of repeated code here...
                 self.msgObject = self.font.render('GAME OVER',False,(0,0,255))
                 self.msgObject2 = self.font2.render('P1 Score was: '+str(self.score),False,(125,125,125))
                 self.msgObject25 = self.font2.render('P2 Score was: ' + str(self.score2),False,(125,125,125))
@@ -465,7 +467,7 @@ if __name__ == '__main__':
         model.update() 
         time.sleep(.1)
         pygame.display.flip()
-        if model.flag == True:
+        if model.flag == True:  # Oh it's a flag to tell your game that it should stop running? Then why not set running = False?
             screen.blit(model.msgObject,model.msgRect)
             screen.blit(model.msgObject2,model.msgRect2)
             screen.blit(model.msgObject25,model.msgRect25)
